@@ -19,7 +19,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>购物车页面</title>
+    <title>购物页面</title>
 </head>
 <style>
     *{
@@ -49,11 +49,13 @@
         font-size: 20px;
         margin: auto;
     }
-    .showcart{
+    .showcart,#backto{
+        display: inline-block;
         font-size: 20px;
         margin-top: 20px;
         color: green;
         font-style: italic;
+        background: yellow;
     }
 
 </style>
@@ -65,8 +67,8 @@
         User user = (User) session1.getAttribute("user");
     %>
     <div class="thetable">
-        时间：<jsp:include page="Date.jsp" flush="true"></jsp:include>
-        <p id="welcome">欢迎:<%=user.getName()%></p>
+        <span>时间：<jsp:include page="Date.jsp" flush="true"></jsp:include></span>
+        <p id="welcome">欢迎:<%=user.getName()%>&nbsp;&nbsp;&nbsp;<a href="Login.jsp" id="backto">退出登录</a></p>
         <table class="table">
             <tr>
                 <td>1</td>

@@ -25,14 +25,22 @@ public class Handle extends HttpServlet {
         HttpSession session = req.getSession();
         String username=req.getParameter("username");
         String password=req.getParameter("password");
-        if(username.equals("薛展鹏") && password.equals("xzp1014xzp")){
-            User user=new User(username,password,"20000");
-            session.setAttribute("user",user);
-            resp.sendRedirect(req.getContextPath()+"/Listcake.jsp");
-        }else {
-            JOptionPane.showMessageDialog(null,"用户不正确！");
+        User user= (User) session.getAttribute("user");
+        if(user==null || "".equals(user)){
+            JOptionPane.showMessageDialog(null,"请先注册！");
             resp.sendRedirect(req.getContextPath() + "/Login.jsp");
+            return;
+        }else{
+            resp.sendRedirect(req.getContextPath()+"/Listcake.jsp");
         }
+//        if(username.equals("薛展鹏") && password.equals("xzp1014xzp")){
+//            User user=new User(username,password,"20000");
+//            session.setAttribute("user",user);
+//            resp.sendRedirect(req.getContextPath()+"/Listcake.jsp");
+//        }else {
+//            JOptionPane.showMessageDialog(null,"用户不正确！");
+//            resp.sendRedirect(req.getContextPath() + "/Login.jsp");
+//        }
     }
 
     @Override

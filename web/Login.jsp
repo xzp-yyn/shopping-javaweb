@@ -65,7 +65,7 @@
                 </footer>
             </form>
             <!-- Register form -->
-            <form id="register" class="otherForm" method="post" action="handle">
+            <form id="register" class="otherForm" method="post" action="register">
                 <header>
                     <h1>用户注册</h1>
                     <p>注册后享受更多服务</p>

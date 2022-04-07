@@ -14,6 +14,20 @@
 <head>
     <title>付款页面</title>
 </head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .border{
+        width: 300px;
+        height: 200px;
+        border: 2px solid black;
+        background-color: aqua;
+        margin: auto;
+        font-size: 40px;
+    }
+</style>
 <body>
     <%
         User user = (User) session.getAttribute("user");
@@ -25,11 +39,23 @@
     时间：<jsp:include page="Date.jsp"/>
     当前用户：${user.getName()}
     <br>
-    <p style="font-size:20px;color: red">账户余额:<%=deposit%></p>
-    <span id="totalprice" style="font-size: 20px;color: springgreen">总价格:<%=total%></span>
-    <br>
-    <span id="paied" style="color: green;font-size: 30px">余额为：<%= paied%></span>
-    <br>
+    <table class="border">
+        <tr>
+            <td>账户余额:</td>
+            <td><%=deposit%></td>
+        </tr>
+        <tr>
+            <td>总价格:</td>
+            <td><%=total%></td>
+        </tr>
+        <tr>
+            <td> 余额为：</td>
+            <td><%= paied%></td>
+        </tr>
+        <tr>
+            <td><a href="Listcake.jsp" style="color: blue;margin-left:45%">返回</a></td>
+        </tr>
+    </table>
     <%
         if(paied<0)
             JOptionPane.showMessageDialog(null,"您的余额不足");
@@ -38,7 +64,6 @@
             user.setDeposit(String.valueOf(paied));
             cart.clear();
     %>
-    <a href="Listcake.jsp" style="color: blue;font-size: 20px">返回</a>
     <br>
 </body>
 </html>

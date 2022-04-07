@@ -18,10 +18,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>购物车</title>
+    <title>我的购物车</title>
 </head>
 <style>
     *{
+        font-size: 20px;
         text-decoration: none;
         margin: 0;
         padding: 0;
@@ -37,17 +38,29 @@
         display: inline-block;
         margin: 20px;
     }
-    #totalprice,.pay{
+    #totalprice {
         border: 1px solid black;
         color: red;
-        font-size: 20px;
         margin-top: 20px;
         margin: 20px;
+    }
+    .pay{
+        display: inline-block;
+        margin-left: 200px;
+        color: black;
+        font-size: 35px;
+        border: 2px solid springgreen;
     }
     .delete{
         margin-left: 20px;
         color: blue;
-        font-size: 20px;
+    }
+    .thegoods{
+        width: 500px;
+        height: 500px;
+        border: 2px solid black;
+        background-color: aqua;
+        margin: auto;
     }
 
 </style>
@@ -65,21 +78,30 @@
             if(id!=null) {
                 cart.add(CakeDB.getcakebyid(id));
             }
-//        System.out.println(cart.size());
+
     %>
+    <table class="thegoods" cellpadding="2px">
     <%
         for(int i=0;i<cart.size();i++){
-            out.println("<br>");
-            out.println("蛋糕：\t"+cart.get(i).getName()+"\t价格：\t"+cart.get(i).getPrice());
-            total+=cart.get(i).getPrice();
-    %>
+            %>
+                <tr>
+                    <td><%=cart.get(i).getName()%></td>
+                    <td><%=cart.get(i).getPrice()%></td>
+                    <td> <a href="<%=request.getContextPath()%>/delete?id=<%=i%>" class="delete" onclick="dele('<%=cart.get(i).getName()%>')">删除</a></td>
+                </tr>
 <%--    <%=request.getContextPath()%>/delete?id=<%=i%>--%>
-    <a href="<%=request.getContextPath()%>/delete?id=<%=i%>" class="delete" onclick="dele('<%=cart.get(i).getName()%>')">删除</a>
-    <%   }}%>
-    <br>
-    <span id="totalprice">总价格:<%= (int) total%></span>
-    <br>
-    <a href="pay.jsp?total=+<%=(int)total%>+" class="pay">付款</a>
+
+    <%   total+=cart.get(i).getPrice(); }%>
+        <tr>
+            <td>总价格：</td>
+            <td><%= (int) total%></td>
+        </tr>
+        <tr>
+            <td><a href="pay.jsp?total=+<%=(int)total%>+" class="pay">付款</a></td>
+        </tr>
+    </table>
+     <%   }%>
+
 </body>
 <script>
     function dele(name) {
